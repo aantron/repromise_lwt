@@ -1,0 +1,4 @@
+(library
+ (public_name repromise_lwt)
+ (name repromise_lwt)
+ (libraries lwt lwt.unix repromise))
