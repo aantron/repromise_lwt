@@ -1,0 +1,19 @@
+{
+  "name": "repromise_lwt",
+  "version": "0.1.0",
+  "esy": {
+    "build": "dune build -p repromise_lwt"
+  },
+  "dependencies": {
+    "@opam/base-unix": "*",
+    "@opam/lwt": "*",
+    "@aantron/repromise": "aantron/repromise",
+    "@opam/result": "*",
+    "@opam/dune": "*",
+    "@esy-ocaml/reason": "*"
+  },
+  "devDependencies": {
+    "@opam/merlin": "^3.0.5",
+    "ocaml": "4.6.x"
+  }
+}
