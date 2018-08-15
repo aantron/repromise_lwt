@@ -15,7 +15,9 @@ let lwtToRepromise = lwtPromise => {
 
 open Lwt.Infix;
 
-let run = (~until) => {
+let (shouldStop, notifyShouldStop) = Lwt.wait();
+
+let run = () => {
   Lwt_main.enter_iter_hooks |> Lwt_sequence.add_r(() =>
     if(Repromise.ReadyCallbacks.callbacksPending()) {
       Lwt.async(() =>
@@ -27,7 +29,8 @@ let run = (~until) => {
     })
   |> ignore;
 
-  until
-  |> repromiseToLwt
-  |> Lwt_main.run;
+  Lwt_main.run(shouldStop);
 };
+
+let stop = () =>
+  Lwt.wakeup_later(notifyShouldStop, ());

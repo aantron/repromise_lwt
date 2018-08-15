@@ -22,9 +22,13 @@ let rec spamDuringIO = count =>
 
 spamDuringIO(5);
 
-let waitForIO =
-  sleep(1.) |> Repromise.map(() => print_endline("Sleep finished"));
+let () =
+  sleep(1.)
+  |> Repromise.wait(() => {
+    print_endline("Sleep finished");
+    Repromise_lwt.stop();
+  });
 
-Repromise_lwt.run(~until=sleep(1.));
+Repromise_lwt.run();
 
 print_endline("Repromise_lwt.run exited");
